@@ -1,0 +1,41 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="Project2:war exploded">
+    <output-path>$PROJECT_DIR$/out/artifacts/Project2_war_exploded</output-path>
+    <root id="root">
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="Project2" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="file-copy" path="$PROJECT_DIR$/WebContent/WEB-INF/lib/freemarker-2.3.23.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/WebContent/WEB-INF/lib/jackson-core-2.8.7.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/WebContent/WEB-INF/lib/commons-logging-1.2.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/WebContent/WEB-INF/lib/jackson-databind-2.8.7.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/WebContent/WEB-INF/lib/spring-tx-4.3.7.RELEASE.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/WebContent/WEB-INF/lib/spring-aop-4.3.7.RELEASE.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/WebContent/WEB-INF/lib/spring-jms-4.3.7.RELEASE.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/WebContent/WEB-INF/lib/spring-orm-4.3.7.RELEASE.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/WebContent/WEB-INF/lib/spring-oxm-4.3.7.RELEASE.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/WebContent/WEB-INF/lib/spring-web-4.3.7.RELEASE.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/WebContent/WEB-INF/lib/jackson-annotations-2.8.7.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/WebContent/WEB-INF/lib/spring-core-4.3.7.RELEASE.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/WebContent/WEB-INF/lib/spring-jdbc-4.3.7.RELEASE.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/WebContent/WEB-INF/lib/spring-test-4.3.7.RELEASE.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/WebContent/WEB-INF/lib/spring-beans-4.3.7.RELEASE.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/WebContent/WEB-INF/lib/spring-webmvc-4.3.7.RELEASE.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/WebContent/WEB-INF/lib/spring-aspects-4.3.7.RELEASE.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/WebContent/WEB-INF/lib/spring-context-4.3.7.RELEASE.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/WebContent/WEB-INF/lib/spring-messaging-4.3.7.RELEASE.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/WebContent/WEB-INF/lib/spring-websocket-4.3.7.RELEASE.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/WebContent/WEB-INF/lib/spring-expression-4.3.7.RELEASE.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/WebContent/WEB-INF/lib/spring-instrument-4.3.7.RELEASE.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/WebContent/WEB-INF/lib/spring-webmvc-portlet-4.3.7.RELEASE.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/WebContent/WEB-INF/lib/spring-context-support-4.3.7.RELEASE.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/WebContent/WEB-INF/lib/spring-instrument-tomcat-4.3.7.RELEASE.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/WebContent/WEB-INF/lib/servlet-api.jar" />
+        </element>
+      </element>
+      <element id="javaee-facet-resources" facet="Project2/web/Web" />
+    </root>
+  </artifact>
+</component>
