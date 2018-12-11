@@ -7,16 +7,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4ca03b68-3069-445b-a09b-eb1fa8587cfc" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/jxl.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/WebContent/WEB-INF/lib/jxl.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Project2.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Project2.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/fudan/sw/dsa/project2/bean/Address.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/fudan/sw/dsa/project2/bean/Address.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/fudan/sw/dsa/project2/bean/Graph.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/fudan/sw/dsa/project2/bean/Graph.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/fudan/sw/dsa/project2/config/WebConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/fudan/sw/dsa/project2/config/WebConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/fudan/sw/dsa/project2/constant/FileGetter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/fudan/sw/dsa/project2/constant/FileGetter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/fudan/sw/dsa/project2/service/IndexService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/fudan/sw/dsa/project2/service/IndexService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/fudan/sw/dsa/project2/bean/Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/fudan/sw/dsa/project2/bean/Test.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/build/classes/" />
@@ -29,12 +21,13 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/fudan/sw/dsa/project2/service/IndexService.java">
+        <entry file="file://$PROJECT_DIR$/src/com/fudan/sw/dsa/project2/bean/Edge.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="528">
-              <caret line="84" column="76" selection-start-line="84" selection-start-column="30" selection-end-line="84" selection-end-column="76" />
+            <state relative-caret-position="104">
+              <caret line="7" column="16" lean-forward="true" selection-start-line="7" selection-start-column="16" selection-end-line="7" selection-end-column="16" />
               <folding>
-                <element signature="imports" expanded="true" />
+                <element signature="e#607#608#0" expanded="true" />
+                <element signature="e#634#635#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -100,8 +93,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/fudan/sw/dsa/project2/bean/Graph.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="186">
-              <caret line="150" column="108" lean-forward="true" selection-start-line="150" selection-start-column="108" selection-end-line="150" selection-end-column="108" />
+            <state relative-caret-position="585">
+              <caret line="107" column="53" lean-forward="true" selection-start-line="107" selection-start-column="53" selection-end-line="107" selection-end-column="53" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="method#Graph#0;class#Graph#0" />
@@ -110,20 +103,22 @@
                 <element signature="method#shortestTime#0;class#Graph#0" />
                 <element signature="method#leastWalk#0;class#Graph#0" />
                 <element signature="method#NoName#0;class#Graph#0" />
+                <element signature="method#anotherNoName#0;class#Graph#0" />
                 <element signature="method#addLine#0;class#Graph#0" />
                 <element signature="method#haveSameLine#0;class#Graph#0" />
                 <element signature="method#constructLine#0;class#Graph#0" />
                 <element signature="method#constructPath#0;class#Graph#0" />
+                <element signature="method#getEdge#0;class#Graph#0" />
                 <element signature="method#transferOnce#0;class#Graph#0" />
                 <element signature="method#initialize#0;class#Graph#0" />
                 <element signature="method#initialize#1;class#Graph#0" />
                 <element signature="method#relax#0;class#Graph#0" />
                 <element signature="method#getReturn#0;class#Graph#0" />
                 <element signature="method#calculateTime#0;class#Graph#0" />
-                <element signature="e#12862#12863#0" expanded="true" />
-                <element signature="e#12977#12978#0" expanded="true" />
-                <element signature="e#13053#13054#0" expanded="true" />
-                <element signature="e#13151#13152#0" expanded="true" />
+                <element signature="e#14213#14214#0" expanded="true" />
+                <element signature="e#14328#14329#0" expanded="true" />
+                <element signature="e#14404#14405#0" expanded="true" />
+                <element signature="e#14502#14503#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -132,8 +127,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/fudan/sw/dsa/project2/bean/Test.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="114">
-              <caret line="6" column="68" selection-start-line="6" selection-start-column="68" selection-end-line="6" selection-end-column="68" />
+            <state relative-caret-position="152">
+              <caret line="8" column="71" lean-forward="true" selection-start-line="8" selection-start-column="71" selection-end-line="8" selection-end-column="71" />
             </state>
           </provider>
         </entry>
@@ -167,8 +162,8 @@
         <option value="$PROJECT_DIR$/src/com/fudan/sw/dsa/project2/bean/KdTree.java" />
         <option value="$PROJECT_DIR$/src/com/fudan/sw/dsa/project2/bean/Vertex.java" />
         <option value="$PROJECT_DIR$/src/com/fudan/sw/dsa/project2/bean/Line.java" />
-        <option value="$PROJECT_DIR$/src/com/fudan/sw/dsa/project2/bean/Test.java" />
         <option value="$PROJECT_DIR$/src/com/fudan/sw/dsa/project2/bean/Graph.java" />
+        <option value="$PROJECT_DIR$/src/com/fudan/sw/dsa/project2/bean/Test.java" />
       </list>
     </option>
   </component>
@@ -239,7 +234,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1544491704829" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1544524308794" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -385,12 +380,12 @@
       <workItem from="1544082691424" duration="1495000" />
       <workItem from="1544157498755" duration="306000" />
       <workItem from="1544442048940" duration="1642000" />
-      <workItem from="1544443735463" duration="9490000" />
+      <workItem from="1544443735463" duration="19337000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="16056000" />
+    <option name="totallyTimeSpent" value="25903000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="7" />
@@ -406,8 +401,8 @@
       <window_info id="Web" order="7" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.6203966" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.3895184" />
+      <window_info anchor="bottom" id="Run" order="2" weight="1.0" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="1.0" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -476,13 +471,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/fudan/sw/dsa/project2/bean/KdTree.java" />
-    <entry file="file://$PROJECT_DIR$/src/com/fudan/sw/dsa/project2/bean/Edge.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="95">
-          <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/fudan/sw/dsa/project2/service/IndexService.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="528">
@@ -490,13 +478,6 @@
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/fudan/sw/dsa/project2/bean/ReturnValue.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="57">
-          <caret line="9" column="19" selection-start-line="9" selection-start-column="19" selection-end-line="9" selection-end-column="19" />
         </state>
       </provider>
     </entry>
@@ -517,6 +498,31 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/fudan/sw/dsa/project2/bean/MinHeap.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="19">
+          <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/fudan/sw/dsa/project2/bean/ReturnValue.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="57">
+          <caret line="9" column="19" selection-start-line="9" selection-start-column="19" selection-end-line="9" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/fudan/sw/dsa/project2/bean/Edge.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="104">
+          <caret line="7" column="16" lean-forward="true" selection-start-line="7" selection-start-column="16" selection-end-line="7" selection-end-column="16" />
+          <folding>
+            <element signature="e#607#608#0" expanded="true" />
+            <element signature="e#634#635#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/fudan/sw/dsa/project2/bean/Vertex.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="361">
@@ -524,10 +530,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/fudan/sw/dsa/project2/bean/MinHeap.java">
+    <entry file="file://$PROJECT_DIR$/src/com/fudan/sw/dsa/project2/bean/Test.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="19">
-          <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
+        <state relative-caret-position="152">
+          <caret line="8" column="71" lean-forward="true" selection-start-line="8" selection-start-column="71" selection-end-line="8" selection-end-column="71" />
         </state>
       </provider>
     </entry>
@@ -545,17 +551,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/fudan/sw/dsa/project2/bean/Test.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="114">
-          <caret line="6" column="68" selection-start-line="6" selection-start-column="68" selection-end-line="6" selection-end-column="68" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/fudan/sw/dsa/project2/bean/Graph.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="186">
-          <caret line="150" column="108" lean-forward="true" selection-start-line="150" selection-start-column="108" selection-end-line="150" selection-end-column="108" />
+        <state relative-caret-position="585">
+          <caret line="107" column="53" lean-forward="true" selection-start-line="107" selection-start-column="53" selection-end-line="107" selection-end-column="53" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#Graph#0;class#Graph#0" />
@@ -564,20 +563,22 @@
             <element signature="method#shortestTime#0;class#Graph#0" />
             <element signature="method#leastWalk#0;class#Graph#0" />
             <element signature="method#NoName#0;class#Graph#0" />
+            <element signature="method#anotherNoName#0;class#Graph#0" />
             <element signature="method#addLine#0;class#Graph#0" />
             <element signature="method#haveSameLine#0;class#Graph#0" />
             <element signature="method#constructLine#0;class#Graph#0" />
             <element signature="method#constructPath#0;class#Graph#0" />
+            <element signature="method#getEdge#0;class#Graph#0" />
             <element signature="method#transferOnce#0;class#Graph#0" />
             <element signature="method#initialize#0;class#Graph#0" />
             <element signature="method#initialize#1;class#Graph#0" />
             <element signature="method#relax#0;class#Graph#0" />
             <element signature="method#getReturn#0;class#Graph#0" />
             <element signature="method#calculateTime#0;class#Graph#0" />
-            <element signature="e#12862#12863#0" expanded="true" />
-            <element signature="e#12977#12978#0" expanded="true" />
-            <element signature="e#13053#13054#0" expanded="true" />
-            <element signature="e#13151#13152#0" expanded="true" />
+            <element signature="e#14213#14214#0" expanded="true" />
+            <element signature="e#14328#14329#0" expanded="true" />
+            <element signature="e#14404#14405#0" expanded="true" />
+            <element signature="e#14502#14503#0" expanded="true" />
           </folding>
         </state>
       </provider>

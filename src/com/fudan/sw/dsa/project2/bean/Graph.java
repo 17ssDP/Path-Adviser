@@ -1,11 +1,13 @@
 package com.fudan.sw.dsa.project2.bean;
 
 import com.fudan.sw.dsa.project2.constant.FileGetter;
+//import sun.jvm.hotspot.runtime.VMReg;
 //import javafx.geometry.VerticalDirection;
 //import sun.jvm.hotspot.opto.MachIfNode;
 //import jdk.internal.module.SystemModuleFinders;
 
 import java.io.File;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -84,11 +86,26 @@ public class Graph {
 //            }
 //        }
         System.out.println(stationsList.indexOf(startNearest.getObject(0)));
+        System.out.println(stationsList.indexOf(endNearest.getObject(0)));
+        ArrayList<Vertex> vertices = new ArrayList<>();
+        ArrayList<Line> lines = new ArrayList<>();
+        for(int i = 0; i < startNearest.getObject(0).getLines().size(); i++) {
+            vertices.add(startNearest.getObject(0));
+            lines.add(startNearest.getObject(0).getLines().get(i));
+        }
         initialize(startNearest.getObject(0));
-        anotherNoName(startNearest.getObject(0), 0);
+        anotherNoName(vertices, lines, 0);
         Vertex endStation = endNearest.getObject(0);
+        String tempLine = "";
         while(endStation != startNearest.getObject(0)) {
+            if(endStation.getPreList().size() > 0) {
+                for(int i = 0; i < endStation.getPreList().size(); i++) {
+                    if(endStation.getPreList().get(i).getLine().equals(tempLine))
+                        endStation.setPre(endStation.getPreList().get(i));
+                }
+            }
             System.out.println(endStation.getAddress() + " " + endStation.getPreList().size());
+            tempLine = endStation.getPre().getLine();
             endStation = endStation.getPre().getStart();
         }
     }
@@ -135,44 +152,51 @@ public class Graph {
     }
 
     //Another way to find the least transfer path from start to end
-    private void anotherNoName(Vertex start, int weight) {
-        boolean over = true;
-        for(int i = 0; i < start.getLines().size(); i++) {
-            Line line = start.getLines().get(i);
-            if(!line.isWalk()) {
-                over = false;
-                line.setWalk(true);
-                int index = line.getStations().indexOf(start);
-                for(int j = index - 1; j >= 0; j--) {
-                    Vertex station = line.getStations().get(j);
-                    if(line.getStations().get(j).getWeight() == line.getStations().get(j + 1).getWeight()) {
-                        line.getStations().get(j).getPreList().add(getEdge(line, line.getStations().get(j + 1), line.getStations().get(j)));
-                    }
-                    if(line.getStations().get(j).getWeight()  > line.getStations().get(j + 1).getWeight()) {
-                        line.getStations().get(j).setPre(getEdge(line, line.getStations().get(j + 1), line.getStations().get(j)));
-                        line.getStations().get(j).setWeight(weight);
-                    }
-                }
-                for(int j = index + 1; j < line.getStations().size(); j++) {
-                    Vertex station = line.getStations().get(j);
-                    if(line.getStations().get(j).getWeight() == line.getStations().get(j - 1).getWeight()) {
-                        line.getStations().get(j).getPreList().add(getEdge(line, line.getStations().get(j - 1), line.getStations().get(j)));
-                    }
-                    if(line.getStations().get(j).getWeight()  > line.getStations().get(j - 1).getWeight()) {
-                        line.getStations().get(j).setPre(getEdge(line, line.getStations().get(j - 1), line.getStations().get(j)));
-                        line.getStations().get(j).setWeight(weight);
-                    }
-                }
-            }
-        }
-        if(!over) {
+    private void anotherNoName(ArrayList<Vertex> vertices, ArrayList<Line> lines, int weight) {
+        while(vertices.size() > 0 && lines.size() > 0) {
             weight++;
-            for(int i = 0; i < start.getLines().size(); i++) {
-                Line line = start.getLines().get(i);
-                for(int j = 0; j < line.getTransfer().size(); j++) {
-                    anotherNoName(line.getTransfer().get(j), weight);
+            ArrayList<Vertex> tempVertex = new ArrayList<>();
+            ArrayList<Line> tempLine = new ArrayList<>();
+            for(int i = 0; i < vertices.size(); i++) {
+                Line line = lines.get(i);
+                int index = line.getStations().indexOf(vertices.get(i));
+                if(!line.isWalk()) {
+                    for(int j = index - 1; j >= 0; j--) {
+                        Vertex station = line.getStations().get(j);
+                        if(line.getStations().get(j).getWeight() == line.getStations().get(j + 1).getWeight()) {
+                            line.getStations().get(j).getPreList().add(getEdge(line, line.getStations().get(j + 1), line.getStations().get(j)));
+                        }
+                        if(line.getStations().get(j).getWeight()  > line.getStations().get(j + 1).getWeight()) {
+                            line.getStations().get(j).setPre(getEdge(line, line.getStations().get(j + 1), line.getStations().get(j)));
+                            line.getStations().get(j).setWeight(weight);
+                        }
+                    }
+
+                    for(int j = index + 1; j < line.getStations().size(); j++) {
+                        Vertex station = line.getStations().get(j);
+                        if(line.getStations().get(j).getWeight() == line.getStations().get(j - 1).getWeight()) {
+                            line.getStations().get(j).getPreList().add(getEdge(line, line.getStations().get(j - 1), line.getStations().get(j)));
+                        }
+                        if(line.getStations().get(j).getWeight()  > line.getStations().get(j - 1).getWeight()) {
+                            line.getStations().get(j).setPre(getEdge(line, line.getStations().get(j - 1), line.getStations().get(j)));
+                            line.getStations().get(j).setWeight(weight);
+                        }
+                    }
+
+                    for(int j = 0; j < line.getTransfer().size(); j++) {
+                        Vertex vertex = line.getTransfer().get(j);
+                        for(int k = 0; k < vertex.getLines().size(); k++) {
+                            if(!vertex.getLines().get(k).isWalk()) {
+                                tempVertex.add(vertex);
+                                tempLine.add(vertex.getLines().get(k));
+                            }
+                        }
+                    }
                 }
+                line.setWalk(true);
             }
+            vertices = tempVertex;
+            lines = tempLine;
         }
     }
 
