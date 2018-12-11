@@ -3,7 +3,6 @@ package com.fudan.sw.dsa.project2.config;
 import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
-
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;

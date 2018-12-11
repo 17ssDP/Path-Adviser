@@ -6,7 +6,7 @@ package com.fudan.sw.dsa.project2.bean;
  * @author zjiehang
  *
  */
-public class Address 
+public class Address
 {
 	private String address;
 	private double longitude;//经度
