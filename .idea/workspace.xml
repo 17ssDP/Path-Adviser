@@ -93,8 +93,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/fudan/sw/dsa/project2/bean/Graph.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="585">
-              <caret line="107" column="53" lean-forward="true" selection-start-line="107" selection-start-column="53" selection-end-line="107" selection-end-column="53" />
+            <state relative-caret-position="225">
+              <caret line="95" column="38" lean-forward="true" selection-start-line="95" selection-start-column="38" selection-end-line="95" selection-end-column="38" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="method#Graph#0;class#Graph#0" />
@@ -110,15 +110,17 @@
                 <element signature="method#constructPath#0;class#Graph#0" />
                 <element signature="method#getEdge#0;class#Graph#0" />
                 <element signature="method#transferOnce#0;class#Graph#0" />
-                <element signature="method#initialize#0;class#Graph#0" />
-                <element signature="method#initialize#1;class#Graph#0" />
                 <element signature="method#relax#0;class#Graph#0" />
                 <element signature="method#getReturn#0;class#Graph#0" />
                 <element signature="method#calculateTime#0;class#Graph#0" />
-                <element signature="e#14213#14214#0" expanded="true" />
-                <element signature="e#14328#14329#0" expanded="true" />
-                <element signature="e#14404#14405#0" expanded="true" />
-                <element signature="e#14502#14503#0" expanded="true" />
+                <element signature="e#10431#10467#1" />
+                <element signature="e#15449#15450#0" expanded="true" />
+                <element signature="e#10533#10582#1" />
+                <element signature="e#15564#15565#0" expanded="true" />
+                <element signature="e#10626#10658#1" />
+                <element signature="e#15640#15641#0" expanded="true" />
+                <element signature="e#10715#10756#1" />
+                <element signature="e#15738#15739#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -127,8 +129,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/fudan/sw/dsa/project2/bean/Test.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="152">
-              <caret line="8" column="71" lean-forward="true" selection-start-line="8" selection-start-column="71" selection-end-line="8" selection-end-column="71" />
+            <state relative-caret-position="133">
+              <caret line="7" lean-forward="true" selection-start-line="7" selection-start-column="2" selection-end-line="11" selection-end-column="69" />
             </state>
           </provider>
         </entry>
@@ -162,8 +164,8 @@
         <option value="$PROJECT_DIR$/src/com/fudan/sw/dsa/project2/bean/KdTree.java" />
         <option value="$PROJECT_DIR$/src/com/fudan/sw/dsa/project2/bean/Vertex.java" />
         <option value="$PROJECT_DIR$/src/com/fudan/sw/dsa/project2/bean/Line.java" />
-        <option value="$PROJECT_DIR$/src/com/fudan/sw/dsa/project2/bean/Graph.java" />
         <option value="$PROJECT_DIR$/src/com/fudan/sw/dsa/project2/bean/Test.java" />
+        <option value="$PROJECT_DIR$/src/com/fudan/sw/dsa/project2/bean/Graph.java" />
       </list>
     </option>
   </component>
@@ -174,7 +176,7 @@
     <option name="FILTER_DEBUG" value="true" />
     <option name="CUSTOM_FILTER" />
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="-8" />
     <option name="width" value="977" />
     <option name="height" value="1038" />
@@ -234,7 +236,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1544524308794" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1544541545615" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -380,16 +382,15 @@
       <workItem from="1544082691424" duration="1495000" />
       <workItem from="1544157498755" duration="306000" />
       <workItem from="1544442048940" duration="1642000" />
-      <workItem from="1544443735463" duration="19337000" />
+      <workItem from="1544443735463" duration="21643000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="25903000" />
+    <option name="totallyTimeSpent" value="28209000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="1550" height="838" extended-state="7" />
-    <editor active="true" />
+    <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" weight="0.29183957" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -401,7 +402,7 @@
       <window_info id="Web" order="7" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="1.0" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.66855526" />
       <window_info anchor="bottom" id="Debug" order="3" weight="1.0" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -530,13 +531,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/fudan/sw/dsa/project2/bean/Test.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="152">
-          <caret line="8" column="71" lean-forward="true" selection-start-line="8" selection-start-column="71" selection-end-line="8" selection-end-column="71" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/fudan/sw/dsa/project2/bean/MyKdTree.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="543">
@@ -551,10 +545,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/fudan/sw/dsa/project2/bean/Test.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="133">
+          <caret line="7" lean-forward="true" selection-start-line="7" selection-start-column="2" selection-end-line="11" selection-end-column="69" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/fudan/sw/dsa/project2/bean/Graph.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="585">
-          <caret line="107" column="53" lean-forward="true" selection-start-line="107" selection-start-column="53" selection-end-line="107" selection-end-column="53" />
+        <state relative-caret-position="225">
+          <caret line="95" column="38" lean-forward="true" selection-start-line="95" selection-start-column="38" selection-end-line="95" selection-end-column="38" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#Graph#0;class#Graph#0" />
@@ -570,15 +571,17 @@
             <element signature="method#constructPath#0;class#Graph#0" />
             <element signature="method#getEdge#0;class#Graph#0" />
             <element signature="method#transferOnce#0;class#Graph#0" />
-            <element signature="method#initialize#0;class#Graph#0" />
-            <element signature="method#initialize#1;class#Graph#0" />
             <element signature="method#relax#0;class#Graph#0" />
             <element signature="method#getReturn#0;class#Graph#0" />
             <element signature="method#calculateTime#0;class#Graph#0" />
-            <element signature="e#14213#14214#0" expanded="true" />
-            <element signature="e#14328#14329#0" expanded="true" />
-            <element signature="e#14404#14405#0" expanded="true" />
-            <element signature="e#14502#14503#0" expanded="true" />
+            <element signature="e#10431#10467#1" />
+            <element signature="e#15449#15450#0" expanded="true" />
+            <element signature="e#10533#10582#1" />
+            <element signature="e#15564#15565#0" expanded="true" />
+            <element signature="e#10626#10658#1" />
+            <element signature="e#15640#15641#0" expanded="true" />
+            <element signature="e#10715#10756#1" />
+            <element signature="e#15738#15739#0" expanded="true" />
           </folding>
         </state>
       </provider>

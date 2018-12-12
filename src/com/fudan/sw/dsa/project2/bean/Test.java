@@ -10,6 +10,6 @@ public class Test {
 //        for(int i = 0; i < returnValue.getSubwayList().size(); i++)
 //            System.out.println(returnValue.getSubwayList().get(i).getAddress());
 //        System.out.println(returnValue.getEndPoint().getAddress());
-        graph.leastTransfer(start, end);
+        graph.shortestTime(start, end);
     }
 }

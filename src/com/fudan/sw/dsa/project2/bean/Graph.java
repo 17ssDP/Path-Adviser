@@ -19,6 +19,7 @@ import java.util.List;
 public class Graph {
     private static final int DIMENSION = 2;  //KdTree维度
     private static final int SPEED = 5;  //步行速度
+    private static final int NUM = 5;
     private ArrayList<Vertex> stationsList;
     private MyKdTree<Vertex> stations;
 
@@ -37,7 +38,6 @@ public class Graph {
 
     //Find the shortest time path from start to end
     private void Dijkstra(Vertex start, Vertex end) {
-        initialize();
         MinHeap minHeap = new MinHeap(this.stationsList);
         initialize(start);
         MinHeap.bulidMinHeap(minHeap);
@@ -53,8 +53,8 @@ public class Graph {
 
     //Find the shortest time path
     public ReturnValue shortestTime(Address start, Address end) {
-        ResultHeap<Vertex> startNearest = stations.getNearestNeighbors(new double[] {start.getLongitude(), start.getLatitude()}, 5);
-        ResultHeap<Vertex> endNearest = stations.getNearestNeighbors(new double[] {end.getLongitude(), end.getLatitude()}, 5);
+        ResultHeap<Vertex> startNearest = stations.getNearestNeighbors(new double[] {start.getLongitude(), start.getLatitude()}, NUM);
+        ResultHeap<Vertex> endNearest = stations.getNearestNeighbors(new double[] {end.getLongitude(), end.getLatitude()}, NUM);
         ReturnValue returnValue = new ReturnValue();
         returnValue.setMinutes(Double.MAX_VALUE);
         for(int i = 0; i < startNearest.size(); i++) {
@@ -78,13 +78,8 @@ public class Graph {
 
     //Find the least transfer path
     public void leastTransfer(Address start, Address end) {
-        ResultHeap<Vertex> startNearest = stations.getNearestNeighbors(new double[] {start.getLongitude(), start.getLatitude()}, 5);
-        ResultHeap<Vertex> endNearest = stations.getNearestNeighbors(new double[] {end.getLongitude(), end.getLatitude()}, 5);
-//        for(int i = 0; i < startNearest.size(); i++) {
-//            for(int j = 0; j < endNearest.size(); j++) {
-//                anotherNoName(startNearest.get);
-//            }
-//        }
+        ResultHeap<Vertex> startNearest = stations.getNearestNeighbors(new double[] {start.getLongitude(), start.getLatitude()}, NUM);
+        ResultHeap<Vertex> endNearest = stations.getNearestNeighbors(new double[] {end.getLongitude(), end.getLatitude()}, NUM);
         System.out.println(stationsList.indexOf(startNearest.getObject(0)));
         System.out.println(stationsList.indexOf(endNearest.getObject(0)));
         ArrayList<Vertex> vertices = new ArrayList<>();
@@ -95,18 +90,43 @@ public class Graph {
         }
         initialize(startNearest.getObject(0));
         anotherNoName(vertices, lines, 0);
-        Vertex endStation = endNearest.getObject(0);
-        String tempLine = "";
-        while(endStation != startNearest.getObject(0)) {
-            if(endStation.getPreList().size() > 0) {
-                for(int i = 0; i < endStation.getPreList().size(); i++) {
-                    if(endStation.getPreList().get(i).getLine().equals(tempLine))
-                        endStation.setPre(endStation.getPreList().get(i));
+        //Vertex endStation = endNearest.getObject(0);
+//        String tempLine = "";
+//        while(endStation != startNearest.getObject(0)) {
+//            if(endStation.getPreList().size() > 0) {
+//                for(int i = 0; i < endStation.getPreList().size(); i++) {
+//                    if(endStation.getPreList().get(i).getLine().equals(tempLine))
+//                        endStation.setPre(endStation.getPreList().get(i));
+//                }
+//            }
+//            System.out.println(endStation.getAddress() + " " + endStation.getPreList().size() + " " + endStation.getWeight());
+//            tempLine = endStation.getPre().getLine();
+//            endStation = endStation.getPre().getStart();
+//        }
+        for(int i = 0; i < startNearest.size(); i++) {
+            for(int j = 0; j < endNearest.size(); j++) {
+                Vertex startStation = startNearest.getObject(i);
+                Vertex endStation = endNearest.getObject(j);
+                for(int k = 0; k < startStation.getLines().size(); k++) {
+                    vertices.add(startNearest.getObject(0));
+                    lines.add(startNearest.getObject(0).getLines().get(i));
+                }
+                initialize(startStation);
+                anotherNoName(vertices, lines, -1);
+                //生成返回值
+                String tempLine = "";
+                while(endStation != startNearest.getObject(0)) {
+                    if(endStation.getPreList().size() > 0) {
+                        for(int n = 0; n < endStation.getPreList().size(); n++) {
+                            if(endStation.getPreList().get(n).getLine().equals(tempLine))
+                                endStation.setPre(endStation.getPreList().get(n));
+                        }
+                    }
+                    System.out.println(endStation.getAddress() + " " + endStation.getPreList().size() + " " + endStation.getWeight());
+                    tempLine = endStation.getPre().getLine();
+                    endStation = endStation.getPre().getStart();
                 }
             }
-            System.out.println(endStation.getAddress() + " " + endStation.getPreList().size());
-            tempLine = endStation.getPre().getLine();
-            endStation = endStation.getPre().getStart();
         }
     }
 
@@ -155,12 +175,13 @@ public class Graph {
     private void anotherNoName(ArrayList<Vertex> vertices, ArrayList<Line> lines, int weight) {
         while(vertices.size() > 0 && lines.size() > 0) {
             weight++;
-            ArrayList<Vertex> tempVertex = new ArrayList<>();
-            ArrayList<Line> tempLine = new ArrayList<>();
+            ArrayList<Vertex> tempVertex = new ArrayList<>(); //储存中转站
+            ArrayList<Line> tempLine = new ArrayList<>(); //储存中转站对应的地铁线
             for(int i = 0; i < vertices.size(); i++) {
                 Line line = lines.get(i);
                 int index = line.getStations().indexOf(vertices.get(i));
                 if(!line.isWalk()) {
+                    //以中转站为中心向两边推进
                     for(int j = index - 1; j >= 0; j--) {
                         Vertex station = line.getStations().get(j);
                         if(line.getStations().get(j).getWeight() == line.getStations().get(j + 1).getWeight()) {
@@ -171,7 +192,6 @@ public class Graph {
                             line.getStations().get(j).setWeight(weight);
                         }
                     }
-
                     for(int j = index + 1; j < line.getStations().size(); j++) {
                         Vertex station = line.getStations().get(j);
                         if(line.getStations().get(j).getWeight() == line.getStations().get(j - 1).getWeight()) {
@@ -182,7 +202,7 @@ public class Graph {
                             line.getStations().get(j).setWeight(weight);
                         }
                     }
-
+                    //是否存在需要更多换乘的站点
                     for(int j = 0; j < line.getTransfer().size(); j++) {
                         Vertex vertex = line.getTransfer().get(j);
                         for(int k = 0; k < vertex.getLines().size(); k++) {
@@ -263,17 +283,12 @@ public class Graph {
         for(Vertex aVertex : stationsList) {
             aVertex.setWeight(Integer.MAX_VALUE);
             aVertex.setPre(null);
+            aVertex.getPreList().clear();
         }
         start.setWeight(0);
     }
 
-    //初始化站点的先驱链表
-    private void initialize() {
-        for (Vertex vertex : stationsList) {
-            vertex.getPreList().clear();
-        }
-    }
-
+    //更新站点权重
     private void relax(Vertex start, Edge edge, int time, MinHeap minHeap) {
         Vertex end = edge.getEnd();
         if(end.getWeight() > start.getWeight() + time) {
