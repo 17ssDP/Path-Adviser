@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 public class Vertex {
     private static final int K = 2;
+    private static final double EARTH_RADIUS = 6378.137;
     private String address;
     private double[] coords = new double[K]; //coords[0] = longitude, coords[1] = latitude
     private ArrayList<Edge> adj;
@@ -11,7 +12,7 @@ public class Vertex {
     private ArrayList<Edge> preList;
     private ArrayList<Line> lines;
     private int weight;
-    private static final double EARTH_RADIUS = 6378.137;
+    private int transfer;
     public Vertex(String address,double longitude, double latitude) {
         this.address = address;
         this.coords[0] = longitude;
@@ -117,6 +118,14 @@ public class Vertex {
 
     public void setLines(ArrayList<Line> lines) {
         this.lines = lines;
+    }
+
+    public int getTransfer() {
+        return transfer;
+    }
+
+    public void setTransfer(int transfer) {
+        this.transfer = transfer;
     }
 
 }

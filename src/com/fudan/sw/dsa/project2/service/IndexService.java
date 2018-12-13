@@ -69,35 +69,22 @@ public class IndexService
 
 		Address startPoint = new Address(startAddress, startLongitude, startLatitude);
 		Address endPoint = new Address(endAddress, endLongitude, endLatitude);
-		List<Address> addresses = new ArrayList<Address>();
+		ReturnValue returnValue = null;
 		switch (choose) {
 			case "1":
 				//步行最少
-				//举个例子
-				addresses.add(new Address("张江高科", "121.593923", "31.207892"));
-				addresses.add(new Address("龙阳路", "121.564028", "31.209714"));
-				addresses.add(new Address("世纪公园", "121.557164", "31.215891"));
-				addresses.add(new Address("上海科技馆", "121.550589", "31.225433"));
-				addresses.add(new Address("世纪大道", "121.533449", "31.23482"));
-				addresses.add(new Address("东昌路", "121.5220233", "31.23905"));
-				addresses.add(new Address("陆家嘴", "121.508836", "31.243558"));
-				addresses.add(new Address("南京东路", "121.490331", "31.242817"));
-				addresses.add(new Address("人民广场", "121.479371", "31.238803"));
+				returnValue = graph.leastWalk(startPoint, endPoint);
 				break;
 			case "2":
 				//换乘最少
 				break;
 			case "3":
 				//时间最短:
-
+				returnValue = graph.shortestTime(startPoint, endPoint);
 				break;
 			default:
 				break;
 		}
-		ReturnValue returnValue = new ReturnValue();
-		returnValue.setStartPoint(startPoint);
-		returnValue.setEndPoint(endPoint);
-		returnValue.setSubwayList(addresses);
 		return returnValue;
 	}
 }

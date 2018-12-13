@@ -10,6 +10,7 @@ import java.io.File;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * for subway graph
@@ -65,6 +66,7 @@ public class Graph {
                     returnValue = temp;
             }
         }
+        //System.out.println(returnValue.getMinutes());
         return returnValue;
     }
 
@@ -90,44 +92,44 @@ public class Graph {
         }
         initialize(startNearest.getObject(0));
         anotherNoName(vertices, lines, 0);
-        //Vertex endStation = endNearest.getObject(0);
-//        String tempLine = "";
-//        while(endStation != startNearest.getObject(0)) {
-//            if(endStation.getPreList().size() > 0) {
-//                for(int i = 0; i < endStation.getPreList().size(); i++) {
-//                    if(endStation.getPreList().get(i).getLine().equals(tempLine))
-//                        endStation.setPre(endStation.getPreList().get(i));
-//                }
-//            }
-//            System.out.println(endStation.getAddress() + " " + endStation.getPreList().size() + " " + endStation.getWeight());
-//            tempLine = endStation.getPre().getLine();
-//            endStation = endStation.getPre().getStart();
-//        }
-        for(int i = 0; i < startNearest.size(); i++) {
-            for(int j = 0; j < endNearest.size(); j++) {
-                Vertex startStation = startNearest.getObject(i);
-                Vertex endStation = endNearest.getObject(j);
-                for(int k = 0; k < startStation.getLines().size(); k++) {
-                    vertices.add(startNearest.getObject(0));
-                    lines.add(startNearest.getObject(0).getLines().get(i));
-                }
-                initialize(startStation);
-                anotherNoName(vertices, lines, -1);
-                //生成返回值
-                String tempLine = "";
-                while(endStation != startNearest.getObject(0)) {
-                    if(endStation.getPreList().size() > 0) {
-                        for(int n = 0; n < endStation.getPreList().size(); n++) {
-                            if(endStation.getPreList().get(n).getLine().equals(tempLine))
-                                endStation.setPre(endStation.getPreList().get(n));
-                        }
-                    }
-                    System.out.println(endStation.getAddress() + " " + endStation.getPreList().size() + " " + endStation.getWeight());
-                    tempLine = endStation.getPre().getLine();
-                    endStation = endStation.getPre().getStart();
+        Vertex endStation = endNearest.getObject(0);
+        String tempLine = "";
+        while(endStation != startNearest.getObject(0)) {
+            if(endStation.getPreList().size() > 0) {
+                for(int i = 0; i < endStation.getPreList().size(); i++) {
+                    if(endStation.getPreList().get(i).getLine().equals(tempLine))
+                        endStation.setPre(endStation.getPreList().get(i));
                 }
             }
+            System.out.println(endStation.getAddress() + " " + endStation.getPreList().size() + " " + endStation.getWeight());
+            tempLine = endStation.getPre().getLine();
+            endStation = endStation.getPre().getStart();
         }
+//        for(int i = 0; i < startNearest.size(); i++) {
+//            for(int j = 0; j < endNearest.size(); j++) {
+//                Vertex startStation = startNearest.getObject(i);
+//                Vertex endStation = endNearest.getObject(j);
+//                for(int k = 0; k < startStation.getLines().size(); k++) {
+//                    vertices.add(startNearest.getObject(0));
+//                    lines.add(startNearest.getObject(0).getLines().get(i));
+//                }
+//                initialize(startStation);
+//                anotherNoName(vertices, lines, -1);
+//                //生成返回值
+//                String tempLine = "";
+//                while(endStation != startNearest.getObject(0)) {
+//                    if(endStation.getPreList().size() > 0) {
+//                        for(int n = 0; n < endStation.getPreList().size(); n++) {
+//                            if(endStation.getPreList().get(n).getLine().equals(tempLine))
+//                                endStation.setPre(endStation.getPreList().get(n));
+//                        }
+//                    }
+//                    System.out.println(endStation.getAddress() + " " + endStation.getPreList().size() + " " + endStation.getWeight());
+//                    tempLine = endStation.getPre().getLine();
+//                    endStation = endStation.getPre().getStart();
+//                }
+//            }
+//        }
     }
 
     //Find the least transfer path from start to end
@@ -172,36 +174,56 @@ public class Graph {
     }
 
     //Another way to find the least transfer path from start to end
-    private void anotherNoName(ArrayList<Vertex> vertices, ArrayList<Line> lines, int weight) {
+    private void anotherNoName(ArrayList<Vertex> vertices, ArrayList<Line> lines, int transfer) {
         while(vertices.size() > 0 && lines.size() > 0) {
-            weight++;
+            transfer++;
             ArrayList<Vertex> tempVertex = new ArrayList<>(); //储存中转站
             ArrayList<Line> tempLine = new ArrayList<>(); //储存中转站对应的地铁线
             for(int i = 0; i < vertices.size(); i++) {
                 Line line = lines.get(i);
                 int index = line.getStations().indexOf(vertices.get(i));
                 if(!line.isWalk()) {
+
                     //以中转站为中心向两边推进
                     for(int j = index - 1; j >= 0; j--) {
-                        Vertex station = line.getStations().get(j);
-                        if(line.getStations().get(j).getWeight() == line.getStations().get(j + 1).getWeight()) {
+                        if(line.getStations().get(j).getTransfer() == line.getStations().get(j + 1).getTransfer()) {
                             line.getStations().get(j).getPreList().add(getEdge(line, line.getStations().get(j + 1), line.getStations().get(j)));
                         }
-                        if(line.getStations().get(j).getWeight()  > line.getStations().get(j + 1).getWeight()) {
-                            line.getStations().get(j).setPre(getEdge(line, line.getStations().get(j + 1), line.getStations().get(j)));
-                            line.getStations().get(j).setWeight(weight);
+                        if(line.getStations().get(j).getTransfer()  > line.getStations().get(j + 1).getTransfer()) {
+                            Edge pre = getEdge(line, line.getStations().get(j + 1), line.getStations().get(j));
+                            int temp = j;
+                            while(pre == null) {
+                                pre = getEdge(line, line.getStations().get(temp), line.getStations().get(j));
+                                temp++;
+                            }
+                            line.getStations().get(j).setPre(pre);
+                            //updateWeight(transfer, line, j);
+                            line.getStations().get(j).setTransfer(transfer);
+                            line.getStations().get(j).setWeight(pre.getStart().getWeight() + pre.getTime());
+                            line.getStations().get(j).setTransfer(transfer);
                         }
                     }
+
                     for(int j = index + 1; j < line.getStations().size(); j++) {
-                        Vertex station = line.getStations().get(j);
-                        if(line.getStations().get(j).getWeight() == line.getStations().get(j - 1).getWeight()) {
+                        if(line.getStations().get(j).getTransfer() == line.getStations().get(j - 1).getTransfer()) {
                             line.getStations().get(j).getPreList().add(getEdge(line, line.getStations().get(j - 1), line.getStations().get(j)));
                         }
-                        if(line.getStations().get(j).getWeight()  > line.getStations().get(j - 1).getWeight()) {
-                            line.getStations().get(j).setPre(getEdge(line, line.getStations().get(j - 1), line.getStations().get(j)));
-                            line.getStations().get(j).setWeight(weight);
+                        if(line.getStations().get(j).getTransfer()  > line.getStations().get(j - 1).getTransfer()) {
+                            //line.getStations().get(j).setPre(getEdge(line, line.getStations().get(j - 1), line.getStations().get(j)));
+                            Edge pre = getEdge(line, line.getStations().get(j - 1), line.getStations().get(j));
+                            int temp = j - 1;
+                            while(pre == null) {
+                                pre = getEdge(line, line.getStations().get(temp), line.getStations().get(j));
+                                temp--;
+                            }
+                            line.getStations().get(j).setPre(pre);
+                            line.getStations().get(j).setWeight(pre.getStart().getWeight() + pre.getTime());
+                            line.getStations().get(j).setTransfer(transfer);
+                            //updateWeight(transfer, line, j);
                         }
                     }
+                   // update(vertices.get(i), line);
+
                     //是否存在需要更多换乘的站点
                     for(int j = 0; j < line.getTransfer().size(); j++) {
                         Vertex vertex = line.getTransfer().get(j);
@@ -282,10 +304,12 @@ public class Graph {
     private void initialize(Vertex start) {
         for(Vertex aVertex : stationsList) {
             aVertex.setWeight(Integer.MAX_VALUE);
+            aVertex.setTransfer(Integer.MAX_VALUE);
             aVertex.setPre(null);
             aVertex.getPreList().clear();
         }
         start.setWeight(0);
+        start.setTransfer(0);
     }
 
     //更新站点权重
@@ -320,6 +344,7 @@ public class Graph {
         returnValue.setEndPoint(end);
         //添加中间站点
         List<Address> subwayList = new ArrayList<>();
+        Vertex temp = endStation;
         while (endStation != startStation) {
             subwayList.add(0, new Address(endStation.getAddress(),
                     Double.toString(endStation.getCoords()[0]), Double.toString(endStation.getCoords()[1])));
@@ -328,17 +353,35 @@ public class Graph {
         subwayList.add(0, new Address(startStation.getAddress(),
                 Double.toString(startStation.getCoords()[0]), Double.toString(startStation.getCoords()[1])));
         returnValue.setSubwayList(subwayList);
-        //计算时间
-        double time = calculateTime(start, end, startStation, endStation);
-        returnValue.setMinutes(time);
+        //设置时间和步行距离
+        calculateTime(start, end, startStation, temp, returnValue);
         return returnValue;
     }
 
     //计算路程所花费的时间
-    private double calculateTime(Address start, Address end, Vertex startStation, Vertex endStation) {
+    private void calculateTime(Address start, Address end, Vertex startStation, Vertex endStation, ReturnValue returnValue) {
         double distant1 = startStation.distanceTo(start);
         double distant2 = endStation.distanceTo(end);
-        return distant1 / SPEED + endStation.getWeight() + distant2 / SPEED;
+        double time = distant1 / SPEED + endStation.getWeight() + distant2 / SPEED;
+        returnValue.setWalkDistan(distant1 + distant2);
+        returnValue.setMinutes(time);
+    }
+
+    private void update(Vertex station, Line line, int transfer) {
+        for(int i = 0; i < station.getAdj().size(); i++) {
+            if(station.getAdj().get(i).getLine().equals(line.getName()) && station.getAdj().get(i).getEnd().getWeight() >= station.getWeight()) {
+                Vertex end = station.getAdj().get(i).getEnd();
+                if(end.getTransfer() == station.getTransfer()) {
+                    end.getPreList().add(getEdge(line, station, end));
+                }
+                if(end.getTransfer() > station.getTransfer()) {
+                    end.setPre(getEdge(line, station, end));
+                    end.setWeight(station.getWeight() + Objects.requireNonNull(getEdge(line, station, end)).getTime());
+                    end.setTransfer(transfer);
+                }
+                update(end, line, transfer);
+            }
+        }
     }
 
     public ArrayList<Vertex> getStationsList() {
