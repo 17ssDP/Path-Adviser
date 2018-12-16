@@ -73,15 +73,15 @@ public class IndexService
 		switch (choose) {
 			case "1":
 				//步行最少
-				returnValue = graph.leastWalk(startPoint, endPoint);
+				returnValue = graph.newLeastWalk(startPoint, endPoint);
 				break;
 			case "2":
 				//换乘最少
-				returnValue = graph.leastTransfer(startPoint, endPoint);
+				returnValue = graph.newLeastTransfer(startPoint, endPoint);
 				break;
 			case "3":
 				//时间最短:
-				returnValue = graph.shortestTime(startPoint, endPoint);
+				returnValue = graph.newShortestTime(startPoint, endPoint);
 				break;
 			default:
 				break;

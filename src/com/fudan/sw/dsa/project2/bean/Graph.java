@@ -9,10 +9,8 @@ import com.fudan.sw.dsa.project2.constant.FileGetter;
 //import jdk.internal.module.SystemModuleFinders;
 
 import java.io.File;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 /**
  * for subway graph
@@ -216,47 +214,6 @@ public class Graph {
         return returnValue;
     }
 
-    //Find the least transfer path from start to end
-    private void NoName(ArrayList<Vertex> stations, Vertex start, Vertex end) {
-        //0次换乘
-        boolean arrive = transferOnce(start, end);
-        //1次换乘
-        if(!arrive) {
-            for(int i = 0; i < start.getLines().size(); i++) {
-                Line line = start.getLines().get(i);
-                for(int j = 0; j < line.getTransfer().size(); j++) {
-                    Vertex station = line.getTransfer().get(j);
-                    arrive =  transferOnce(station, end);
-                    if(arrive) {
-                        constructLine(start, station, i);
-                    }
-                }
-            }
-        }
-
-        //2次换乘
-        if(!arrive) {
-            for(int i = 0; i < start.getLines().size(); i++) {
-                Line line = start.getLines().get(i);
-                for(int j = 0; j < line.getTransfer().size(); j++) {
-                    Vertex station = line.getTransfer().get(j);
-                    for(int k = 0; k < station.getLines().size(); k++) {
-                        Line subLine = station.getLines().get(k);
-                        for(int n = 0; n < subLine.getTransfer().size(); n++) {
-                            Vertex subStation = subLine.getTransfer().get(n);
-                            arrive = transferOnce(subStation, end);
-                            if(arrive) {
-                                constructLine(station, subStation, k);
-                                constructLine(start, station, i);
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        //
-    }
-
     //Another way to find the least transfer path from start to end
     private void anotherNoName(ArrayList<Vertex> vertices, ArrayList<Line> lines, int transfer) {
         while(vertices.size() > 0 && lines.size() > 0) {
@@ -326,62 +283,11 @@ public class Graph {
         }
     }
 
-    private void addLine(ArrayList<Line> lines, Vertex station) {
-
-    }
-
-    private boolean haveSameLine(ArrayList<Line> lines, Vertex end) {
-        for (Line line : lines) {
-            for (int j = 0; j < end.getLines().size(); j++) {
-                if (line.getName().equals(end.getLines().get(j).getName()))
-                    return true;
-            }
-        }
-        return false;
-    }
-
-    private void constructLine(Vertex start, Vertex end, int i) {
-        Line line = start.getLines().get(i);
-        constructPath(line, start, end);
-    }
-
-    private void constructPath(Line line, Vertex start, Vertex end) {
-        int startNum = line.getStations().indexOf(start);
-        int endNum = line.getStations().indexOf(end);
-        if(startNum < endNum) {
-            for(int i = endNum; i > startNum; i--) {
-                Edge edge = getEdge(line, line.getStations().get(i - 1), end);
-                line.getStations().get(i).setPre(edge);
-                end = edge.getStart();
-            }
-        }else if(startNum > endNum) {
-            for(int i = endNum; i < startNum; i++) {
-                Edge edge = getEdge(line, line.getStations().get(i + 1), end);
-                line.getStations().get(i).setPre(edge);
-                end = edge.getStart();
-            }
-        }
-    }
-
     private Edge getEdge(Line line, Vertex start, Vertex end) {
         for(int j = 0; j < start.getAdj().size(); j++)
             if(start.getAdj().get(j).getLine().equals(line.getName()) && start.getAdj().get(j).getEnd() == end)
                 return start.getAdj().get(j);
         return null;
-    }
-
-    //一次换乘可达
-    private boolean transferOnce(Vertex start, Vertex end) {
-        boolean once = false;
-        for(int i = 0; i < start.getLines().size(); i++) {
-            for(int j = 0; j < end.getLines().size(); j++) {
-                if(start.getLines().get(i) == end.getLines().get(j)) {
-                    once = true;
-                    constructLine(start, end, i);
-                }
-            }
-        }
-        return once;
     }
 
     //初始化站点的权重
@@ -452,23 +358,6 @@ public class Graph {
         double time = distant1 / SPEED + endStation.getWeight() + distant2 / SPEED;
         returnValue.setWalkDistan(distant1 + distant2);
         returnValue.setMinutes(time);
-    }
-
-    private void update(Vertex station, Line line, int transfer) {
-        for(int i = 0; i < station.getAdj().size(); i++) {
-            if(station.getAdj().get(i).getLine().equals(line.getName()) && station.getAdj().get(i).getEnd().getWeight() >= station.getWeight()) {
-                Vertex end = station.getAdj().get(i).getEnd();
-                if(end.getTransfer() == station.getTransfer()) {
-                    end.getPreList().add(getEdge(line, station, end));
-                }
-                if(end.getTransfer() > station.getTransfer()) {
-                    end.setPre(getEdge(line, station, end));
-                    end.setWeight(station.getWeight() + Objects.requireNonNull(getEdge(line, station, end)).getTime());
-                    end.setTransfer(transfer);
-                }
-                update(end, line, transfer);
-            }
-        }
     }
 
     public ArrayList<Vertex> getStationsList() {
