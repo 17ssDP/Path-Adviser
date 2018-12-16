@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Vertex {
     private static final int K = 2;
-    private static final double EARTH_RADIUS = 6378.137;
+    private static final double EARTH_RADIUS = 6371.393;
     private String address;
     private double[] coords = new double[K]; //coords[0] = longitude, coords[1] = latitude
     private ArrayList<Edge> adj;

@@ -14,7 +14,7 @@ public class DataBuilder {
 
     }
 
-    public void loadMap(File input, ArrayList<Vertex> addressList, MyKdTree<Vertex> stations) {
+    public void loadMap(File input, ArrayList<Vertex> addressList, MyKdTree<Vertex> stations, ArrayList<Line> lines) {
         try {
             Workbook book = Workbook.getWorkbook(input);
             int sheetSize = book.getNumberOfSheets();
@@ -24,6 +24,7 @@ public class DataBuilder {
                 String lineName = sheet.getName();
                 //创建Line对象
                 Line line = new Line(lineName);
+                lines.add(line);
                 int columns = sheet.getColumns();
                 int rows = sheet.getRows();
                 //先加入所有的站

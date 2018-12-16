@@ -6,7 +6,6 @@ import java.util.stream.IntStream;
 
 public class MyKdTree<T> {
     protected static final int defaultBucketSize = 48;
-
     private final int dimensions;
     private final int bucketSize;
     private NodeKD root;
@@ -99,12 +98,9 @@ public class MyKdTree<T> {
         private NodeKD() {
             bucketValues = new Object[bucketSize];
             bucketKeys = new double[bucketSize][];
-
             left = right = null;
             maxBounds = minBounds = null;
-
             isLeaf = true;
-
             current = 0;
         }
 
@@ -172,8 +168,7 @@ public class MyKdTree<T> {
                 // Branch
                 Object[] tmp = new Object[0];
                 if (intersects(upper, lower, left.maxBounds, left.minBounds)) {
-                    Object[] tmpl = left.range(upper, lower);
-                    if (0 == tmp.length) tmp = tmpl;
+                    tmp = left.range(upper, lower);
                 }
                 if (intersects(upper, lower, right.maxBounds, right.minBounds)) {
                     Object[] tmpr = right.range(upper, lower);
@@ -218,7 +213,7 @@ public class MyKdTree<T> {
 
         private void splitLeaf() {
             double bestRange = 0;
-            for(int i=0;i<dimensions;++i) {
+            for(int i = 0; i < dimensions; ++i) {
                 double range = maxBounds[i] - minBounds[i];
                 if(range > bestRange) {
                     sliceDimension = i;
@@ -238,6 +233,7 @@ public class MyKdTree<T> {
                     left.addLeafPoint(bucketKeys[i], bucketValues[i]);
                 }
             }
+
             bucketKeys = null;
             bucketValues = null;
             isLeaf = false;
