@@ -1,6 +1,8 @@
 package com.fudan.sw.dsa.project2.bean;
 
 import com.fudan.sw.dsa.project2.constant.FileGetter;
+//import com.sun.xml.internal.ws.api.server.DocumentAddressResolver;
+//import com.sun.xml.internal.ws.api.server.DocumentAddressResolver;
 //import sun.jvm.hotspot.runtime.VMReg;
 //import javafx.geometry.VerticalDirection;
 //import sun.jvm.hotspot.opto.MachIfNode;
@@ -24,6 +26,7 @@ public class Graph {
     private ArrayList<Vertex> stationsList;
     private MyKdTree<Vertex> stations;
     private ArrayList<Line> lines;
+    private Vertex[][] map;
     public Graph() {
         this.stations = new MyKdTree<>(DIMENSION);
         this.stationsList = new ArrayList<>();
@@ -36,6 +39,7 @@ public class Graph {
         File file = fileGetter.readFileFromClasspath();
         DataBuilder dataBuilder = new DataBuilder();
         dataBuilder.loadMap(file, stationsList, stations, lines);
+        this.map = getMap();
     }
 
     //Find the shortest time path from start to end
@@ -72,12 +76,35 @@ public class Graph {
         return returnValue;
     }
 
+    public ReturnValue newShortestTime(Address start, Address end) {
+        ArrayList<Vertex> startNearest = getNear(start);
+        ArrayList<Vertex> endNearest = getNear(end);
+        ReturnValue returnValue = new ReturnValue();
+        returnValue.setMinutes(Double.MAX_VALUE);
+        for(int i = 0; i < startNearest.size(); i++) {
+            for(int j = 0; j < endNearest.size(); j++) {
+                Dijkstra(startNearest.get(i), endNearest.get(j));
+                ReturnValue temp = getReturn(start, end, startNearest.get(i), endNearest.get(j));
+                System.out.println(startNearest.get(i).getAddress() + endNearest.get(j).getAddress() + "时间： " + temp.getMinutes());
+                if(temp.getMinutes() < returnValue.getMinutes())
+                    returnValue = temp;
+            }
+        }
+        //System.out.println(returnValue.getMinutes());
+        return returnValue;
+    }
+
     //Find the walking least path
     public ReturnValue leastWalk(Address start, Address end) {
         ResultHeap<Vertex> startHeap = stations.getNearestNeighbors(new double[] {start.getLongitude(), start.getLatitude()}, 1);
         ResultHeap<Vertex> endHeap = stations.getNearestNeighbors(new double[] {end.getLongitude(), end.getLatitude()}, 1);
         Dijkstra(startHeap.getObject(0), endHeap.getObject(0));
         return  getReturn(start, end, startHeap.getObject(0), endHeap.getObject(0));
+    }
+
+    public ReturnValue newLeastWalk(Address start, Address end) {
+        Dijkstra(getNearest(start), getNearest(end));
+        return  getReturn(start, end, getNearest(start), getNearest(end));
     }
 
     //Find the least transfer path
@@ -92,6 +119,60 @@ public class Graph {
                 ArrayList<Line> lines = new ArrayList<>();
                 Vertex startStation = startNearest.getObject(i);
                 Vertex endStation = endNearest.getObject(j);
+                for(int k = 0; k < startStation.getLines().size(); k++) {
+                    vertices.add(startStation);
+                    lines.add(startStation.getLines().get(k));
+                }
+                initialize(startStation);
+                anotherNoName(vertices, lines, -1);
+                if(endStation.getTransfer() <= leastTransfer) {
+                    ReturnValue tempReturn = new ReturnValue();
+                    //生成返回值
+                    tempReturn.setStartPoint(start);
+                    tempReturn.setEndPoint(end);
+                    List<Address> subwayList = new ArrayList<>();
+                    String tempLine = "";
+                    Vertex temp = endStation;
+                    while(endStation != startStation) {
+                        if(endStation.getPreList().size() > 0) {
+                            for(int n = 0; n < endStation.getPreList().size(); n++) {
+                                if(endStation.getPreList().get(n).getLine().equals(tempLine))
+                                    endStation.setPre(endStation.getPreList().get(n));
+                            }
+                        }
+                        subwayList.add(0, new Address(endStation.getAddress(),
+                                Double.toString(endStation.getCoords()[0]), Double.toString(endStation.getCoords()[1])));
+                        tempLine = endStation.getPre().getLine();
+                        endStation = endStation.getPre().getStart();
+                    }
+                    subwayList.add(0, new Address(startStation.getAddress(),
+                            Double.toString(startStation.getCoords()[0]), Double.toString(startStation.getCoords()[1])));
+                    tempReturn.setSubwayList(subwayList);
+                    //设置时间和步行距离
+                    calculateTime(start, end, startStation, temp, tempReturn);
+                    if(temp.getTransfer() == leastTransfer && tempReturn.getMinutes() < returnValue.getMinutes())
+                        returnValue = tempReturn;
+                    else if(temp.getTransfer() < leastTransfer) {
+                        returnValue = tempReturn;
+                        leastTransfer = temp.getTransfer();
+                    }
+                }
+            }
+        }
+        return returnValue;
+    }
+
+    public ReturnValue newLeastTransfer(Address start, Address end) {
+        ArrayList<Vertex> startNearest = getNear(start);
+        ArrayList<Vertex> endNearest = getNear(end);
+        ReturnValue returnValue = new ReturnValue();
+        int leastTransfer = Integer.MAX_VALUE;
+        for(int i = 0; i < startNearest.size(); i++) {
+            for(int j = 0; j < endNearest.size(); j++) {
+                ArrayList<Vertex> vertices = new ArrayList<>();
+                ArrayList<Line> lines = new ArrayList<>();
+                Vertex startStation = startNearest.get(i);
+                Vertex endStation = endNearest.get(j);
                 for(int k = 0; k < startStation.getLines().size(); k++) {
                     vertices.add(startStation);
                     lines.add(startStation.getLines().get(k));
@@ -404,5 +485,47 @@ public class Graph {
 
     public void setStations(MyKdTree<Vertex> stations) {
         this.stations = stations;
+    }
+
+    private Vertex[][] getMap() {
+        Vertex[][] map = new Vertex[1000][1000];
+        for(int i = 0; i < stationsList.size(); i++) {
+            int row = Integer.parseInt(Double.toString(stationsList.get(i).getCoords()[0]).substring(4, 7));
+            int col = Integer.parseInt(Double.toString(stationsList.get(i).getCoords()[1]).substring(3, 6));
+            map[row][col] = stationsList.get(i);
+        }
+        return map;
+    }
+
+    private ArrayList<Vertex> getNear(Address address) {
+        int row = Integer.parseInt(Double.toString(address.getLongitude()).substring(4, 7));
+        int col = Integer.parseInt(Double.toString(address.getLatitude()).substring(3, 6));
+        ArrayList<Vertex> near = new ArrayList<>();
+        int tag = 1;
+        while (near.size() <= 5) {
+            for(int i = row - tag; i <= row + tag; i++) {
+                for(int j = col - tag; j <= col + tag; j++) {
+                    if((i >= 0 && i < map.length) && (j >= 0 && j < map.length) && map[i][j] != null)
+                       if(near.indexOf(map[i][j]) < 0)
+                           near.add(map[i][j]);
+                }
+            }
+            tag++;
+        }
+        return near;
+    }
+
+    private Vertex getNearest(Address address) {
+        ArrayList<Vertex> near = getNear(address);
+        double distance = Double.MAX_VALUE;
+        Vertex nearest = null;
+        for(int i = 0; i < near.size(); i++) {
+            double temp = near.get(i).distanceTo(address);
+            if(distance > temp) {
+                nearest = near.get(i);
+                distance = temp;
+            }
+        }
+        return nearest;
     }
 }
