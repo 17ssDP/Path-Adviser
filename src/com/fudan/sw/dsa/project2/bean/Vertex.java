@@ -13,6 +13,7 @@ public class Vertex {
     private ArrayList<Line> lines;
     private int weight;
     private int transfer;
+    private double distance;
     public Vertex(String address,double longitude, double latitude) {
         this.address = address;
         this.coords[0] = longitude;
@@ -126,6 +127,14 @@ public class Vertex {
 
     public void setTransfer(int transfer) {
         this.transfer = transfer;
+    }
+
+    public double getDistance() {
+        return distance;
+    }
+
+    public void setDistance(double distance) {
+        this.distance = distance;
     }
 
 }

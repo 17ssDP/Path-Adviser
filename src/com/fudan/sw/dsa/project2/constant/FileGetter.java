@@ -19,7 +19,7 @@ import java.util.ArrayList;
  */
 public class FileGetter
 {
-	private static final String FILE_PATH = "C:\\Users\\Peng Deng\\Desktop\\Project2\\src\\com\\fudan\\sw\\dsa\\project2\\resource\\subway.xls";
+	private static final String FILE_PATH = "E:\\程序设计\\数据结构与算法导论\\Path-Adviser\\src\\com\\fudan\\sw\\dsa\\project2\\resource\\subway.xls";
 
     public File readFileFromClasspath()
     {
